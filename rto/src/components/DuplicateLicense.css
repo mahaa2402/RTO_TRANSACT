@@ -1,0 +1,75 @@
+
+
+html, body {
+  height: 100%; /* Ensure the html and body elements take up the full height */
+  margin: 0; /* Remove default margin */
+  padding: 0; /* Ensure no padding around the edges */
+  background-color: black; /* Set the background color to black for the entire page */
+  color: white; /* Set the default text color to white */
+  
+  overflow-y: scroll;
+}
+
+.duplicate-license-container {
+  margin: 0;
+  padding: 0;
+  height: 100vh; /* Ensure the container takes the full height of the viewport */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;/* Include padding in height and width */
+}
+
+
+.heading {
+  color: #d3d3d3ad; /* Set heading color */
+  font-size: 4em; /* Adjust font size for the heading */
+  margin-bottom: 50px; /* Adjust margin for better spacing */
+  text-shadow: 0 0 5px rgba(112, 111, 111, 0.551); /* Add initial blur effect */
+  transition: text-shadow 0.3s ease; 
+  margin-top: 20px;/* Smooth transition for the hover effect */
+}
+
+.paragraph {
+  color: #d3d3d3b0; /* Set paragraph color */
+  font-size: 1.1em; /* Adjust font size for the paragraph */
+  margin-left: 100px;
+  margin-right: 100px;
+  text-align: center; /* Center-align the text */
+}
+
+.instructions {
+  line-height: 1.6; /* Increase line height for readability */
+  margin: 20px;
+  padding: 20px;
+  color: #d3d3d3b0;
+  font-size: 1.1em;
+  text-align: left; /* Align text to the left */
+  width: 70%; /* Adjust width for better presentation */
+}
+
+/* Button Styles */
+:root {
+  --primary-color: 111, 76, 255; /* violet */
+  --text-color: 256, 256, 256; /* white */
+}
+
+.btn {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 18px;
+  padding: 12px 32px;
+  margin: 1rem;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  border-radius: 50px;
+}
+
+.btn-glow:hover {
+  box-shadow: rgba(var(--primary-color), 0.5) 0px 0px 20px 0px;
+}
+
+.btn-gradient {
+  background-image: linear-gradient(to right, rgb(1 134 218), rgb(182 49 167));
+  border: 0;
+  color: rgba(var(--text-color));
+}

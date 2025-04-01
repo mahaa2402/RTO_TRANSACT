@@ -1,0 +1,165 @@
+.vehicle-inspection-container {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Change this to space-between or center if needed */
+    align-items: center; /* This may help center the content */
+    
+    max-height: 100vh; /* Ensure this is set to 100vh */
+    box-sizing: border-box; /* Shadow effect */
+}
+
+/* Title styling */
+.heading {
+    text-align: center;
+    color: #d3d3d3; /* Text color */
+    font-size: 40px;
+    margin-bottom: 20px;
+}
+
+/* Subtitle styles */
+h2 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-size: 1.8em;
+    border-bottom: 2px solid rgb(97, 127, 145); /* Underline effect */
+    padding-bottom: 5px;
+}
+
+/* Paragraph styles */
+p {
+    line-height: 1.6; /* Better readability */
+    color: #d3d3d3; /* Light text color */
+}
+
+/* Box styles */
+.inspection-boxes {
+    display: flex;
+    justify-content: space-between; /* Space out boxes */
+    margin-bottom: 20px;
+}
+
+/* Styling each inspection box */
+.inspection-box {
+    width: 200px; /* Adjust width as needed */
+    height: 260px; /* Adjust height to ensure it's fully visible */
+    background-color: #2a2a2a; /* Dark box background */
+    border: 3px solid transparent;
+    border-image: linear-gradient(to right, rgb(1, 134, 218), rgb(182, 49, 167)) 1; /* Gradient border */
+    border-radius: 8px; /* Rounded corners */
+    padding: 15px;
+    margin: 0 10px; /* Margin between boxes */
+    text-align: center; /* Center text */
+    color: #d3d3d3; /* Light text color */
+   
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover effects */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Shadow for boxes */
+}
+
+.inspection-box:hover {
+    transform: scale(1.05); /* Scale up on hover */
+}
+
+/* Image styles */
+.inspection-image {
+    max-width: 100%; /* Ensure image fits within the box */
+    height: 40%; /* Maintain aspect ratio of the image */
+    margin-bottom: 10px; /* Space between image and heading */
+    border-radius: 8px; /* Rounded corners */
+}
+
+/* More button styles */
+.more-button {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-image: linear-gradient(to right, rgb(1, 134, 218), rgb(182, 49, 167)); /* Gradient button */
+    color: black; /* Text color */
+    border: none;
+    border-radius: 5px;
+    text-decoration: none; /* Remove underline */
+    font-weight: bold;
+    transition: background-color 0.3s; /* Smooth transition */
+}
+
+.more-button:hover {
+    background-color: rgba(0, 0, 0, 0.1); /* Optional hover effect */
+}
+.inspection-image
+{
+    height:50px;
+}
+
+/* Additional styles for lists */
+ul {
+    list-style-type: disc; /* Bullet points for lists */
+    padding-left: 20px; /* Indent list items */
+    color: #d3d3d3; /* Light text color */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .inspection-boxes {
+        flex-direction: column; /* Stack boxes vertically on small screens */
+    }
+    
+    .inspection-box {
+        margin: 10px 0; /* Margin for vertical spacing */
+    }
+}
+.faq-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+  }
+  
+  .faq-box {
+    background-color: #333; /* Dark background for boxes */
+    margin: 10px 0; /* Margin between boxes */
+    padding: 15px;
+    border-radius: 8px;
+    color: #580b0b; /* White text */
+  }
+
+  .faq-box:hover
+  {
+    background-color: #4c6b94ad;/* Optional hover effect */
+}
+  
+  
+  .faq-box h3 {
+    margin: 0; /* Remove default margin */
+    color: #d3d3d3ad; /* Custom color for FAQ question titles */
+  }
+  
+  .faq-box p {
+    margin-top: 5px; /* Space between question and answer */
+  }
+  .city-select-container {
+    display: flex; /* Use flexbox for horizontal layout */
+    align-items: flex-start; /* Align items to the start */
+    margin-top: 20px; /* Add some margin for spacing */
+  }
+  
+  .city-select {
+    margin-right: 20px; /* Space between dropdown and locations */
+  }
+  
+  .locations-container {
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    margin-left: 20px; /* Add space on the left side */
+  }
+  
+  .locations-list {
+    list-style-type: none; /* Remove default list styles */
+    padding: 0; /* Remove padding */
+    margin: 0; /* Remove margin */
+  }
+  
+  .locations-list li {
+    background-color: #f0f0f0; /* Light background for each location */
+    padding: 10px; /* Padding for each item */
+    margin: 5px 0; /* Space between items */
+    border-radius: 5px; /* Rounded corners */
+  }

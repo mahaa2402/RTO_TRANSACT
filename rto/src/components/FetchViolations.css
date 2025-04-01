@@ -1,0 +1,146 @@
+.appointments-container {
+    max-width: 1100px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #464545;
+    border-radius: 8px;
+    box-shadow: 0 0 25px rgba(1, 134, 218, 0.5), 0 0 25px rgba(182, 49, 167, 0.5);
+    color: white;
+    border: 5px solid transparent;
+    border-image: linear-gradient(to right, rgb(1, 134, 218), rgb(182, 49, 167)) 1;
+}
+
+h2 {
+    text-align: center;
+    color: #fcf7f7e6;
+    font-size: 2em;
+    text-shadow: 0 0 5px rgba(112, 111, 111, 0.551);
+    transition: text-shadow 0.3s ease;
+}
+
+h2:hover {
+    text-shadow: 0 0 15px rgba(1, 134, 218, 0.5), 0 0 25px rgba(182, 49, 167, 0.5);
+}
+
+.table-container {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    background: #333;
+    color: white;
+}
+
+thead {
+    background: #007bff;
+    color: white;
+}
+
+thead th, tbody td {
+    padding: 12px;
+    text-align: center;
+    font-size: 14px;
+    border-bottom: 1px solid #555;
+}
+
+/* ✅ Fix: Ensure table rows are visible */
+tbody tr {
+    display: table-row !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+table {
+    table-layout: auto; /* Allows better content fitting */
+}
+
+th, td {
+    white-space: nowrap; /* Prevents text from wrapping */
+    word-wrap: break-word;
+}
+
+
+/* ✅ Fix: Ensure text in table is visible */
+tbody td {
+    color: white;
+    opacity: 1; 
+    visibility: visible;
+}
+
+/* ✅ Fix: Ensure even rows are visible */
+tbody tr:nth-child(even) {
+    background: #444 !important; /* Slightly lighter for contrast */
+    color: #fff !important;
+}
+
+
+
+
+.fix-appointment-btn {
+    padding: 8px 12px;
+    background: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.fix-appointment-btn:hover {
+    background: #218838;
+}
+
+.status-fixed {
+    color: #28a745;
+    font-weight: bold;
+}
+
+.form-container {
+    color: #d3d3d3b0;
+    padding: 50px;
+    margin: 50px auto;
+    border-radius: 20px;
+    background-color: #464545;
+    position: relative;
+    border: 5px solid transparent;
+    border-image: linear-gradient(to right, rgb(1, 134, 218), rgb(182, 49, 167)) 1;
+}
+
+.form-container:hover {
+    box-shadow: 0 0 25px rgba(1, 134, 218, 0.5), 0 0 25px rgba(182, 49, 167, 0.5);
+}
+
+.btn {
+    font-size: 18px;
+    padding: 12px 32px;
+    cursor: pointer;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    margin: 10px auto;
+    display: block;
+    text-align: center;
+}
+
+.btn-gradient {
+    background-image: linear-gradient(to right, rgb(1 134 218), rgb(182 49 167));
+    border: 0;
+    color: white;
+}
+/* Ensure rows and cells are displayed */
+tbody tr {
+    display: table-row !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    height: auto !important;
+}
+
+/* Ensure text is visible */
+tbody td {
+    color: white !important;
+    font-size: 14px !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    white-space: nowrap !important;
+}

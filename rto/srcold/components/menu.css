@@ -1,0 +1,120 @@
+@import url(//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css);
+@import url(https://fonts.googleapis.com/css?family=Titillium+Web:300);
+
+.fa-2x {
+    font-size: 3em;
+}
+
+.fa-times
+{
+   color:#999;
+}
+
+.fa-bars
+{
+  color:#999;
+}
+.fa {
+    position: relative;
+    display: table-cell;
+    width: 60px;
+    height: 66px;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 27px;
+    margin-top: 20%;
+    left:5%;
+}
+
+.sidebar {
+    background: #212121;
+    border-right: 1px solid #e5e5e5;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    left: 0;
+    width: 48px;
+    overflow: hidden;
+    transition: width 0.3s ease;
+    z-index: 1000;
+}
+
+.sidebar.open {
+    width: 250px; /* Adjust to your desired width */
+}
+
+.sidebar .logo {
+    text-align: center;
+    padding: 10px;
+}
+
+.sidebar .logo img {
+    width: 40px; /* Adjust to the desired size */
+    height: auto;
+}
+
+.sidebar .main-menu {
+    margin: 7px 0;
+}
+
+.sidebar .main-menu li {
+    position: relative;
+    display: block;
+    width: 250px;
+}
+
+.sidebar .main-menu li a {
+    position: relative;
+    display: table;
+    color: #999;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    text-decoration: none;
+    margin-left: 2%;
+    
+    transition: all 0.1s linear;
+}
+
+.sidebar .nav-icon {
+    position: relative;
+    display: table-cell;
+    width: 60px;
+    height: 36px;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 18px;
+}
+
+.sidebar .nav-text {
+    position: relative;
+    display: table-cell;
+    vertical-align: middle;
+    width: 270px;
+    left:10%;
+    font-family: 'Titillium Web', sans-serif;
+}
+
+
+
+.sidebar a:hover, 
+.sidebar a:focus {
+    text-decoration: none;
+    color: #fff;
+    background-color: #000000;
+}
+
+.area {
+    float: left;
+    background: #e2e2e2;
+    width: 100%;
+    height: 100%;
+}
+
+@font-face {
+    font-family: 'Titillium Web';
+    font-style: normal;
+    font-weight: 300;
+    src: local('Titillium Web Light'), local('TitilliumWeb-Light'), 
+         url(http://themes.googleusercontent.com/static/fonts/titilliumweb/v2/anMUvcNT0H1YN4FII8wpr24bNCNEoFTpS2BTjF6FB5E.woff) format('woff');
+}

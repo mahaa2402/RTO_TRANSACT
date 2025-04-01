@@ -1,0 +1,55 @@
+/* Container for the Issue Fine component */
+.issue-fine-container {
+    max-width: 600px; /* Limit the width of the form */
+    margin: 20px auto; /* Center the form horizontally */
+    padding: 20px; /* Padding around the form */
+    border-radius: 10px; /* Rounded corners */
+    background-color: rgba(70, 69, 69, 0.5); /* Semi-transparent background */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect */
+    color: #f2f2f2; 
+    height:200%;/* Text color */
+}
+
+/* Heading style */
+.issue-fine-container h2 {
+    text-align: center; /* Center the heading */
+    margin-bottom: 20px; /* Space below the heading */
+}
+
+/* Form input styles */
+.issue-fine-container input {
+    width: 200%;
+    height: 400%; /* Full width */
+    padding: 20px; /* Padding inside the inputs */
+    margin-bottom: 15px; /* Space between inputs */
+    border: none; /* Remove default border */
+    border-radius: 5px; /* Rounded corners */
+    background-color: rgba(255, 255, 255, 0.8); /* Slightly transparent white */
+    color: #333; /* Text color */
+}
+
+/* Button styles */
+.issue-fine-container button {
+    position: relative;
+    top:40px;
+    width: 100%; /* Full width */
+    padding: 20px; /* Padding for the button */
+    background-color: #4139b5; /* Button background color */
+    color: white; /* Button text color */
+    border: none; /* Remove default border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s; /* Smooth background color transition */
+}
+
+/* Button hover effect */
+.issue-fine-container button:hover {
+    background-color: #ff4c3b; /* Change background on hover */
+}
+
+/* Responsive styles */
+@media (max-width: 480px) {
+    .issue-fine-container {
+        width: 90%; /* Make the container narrower on small screens */
+    }
+}

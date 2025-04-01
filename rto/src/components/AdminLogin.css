@@ -1,0 +1,89 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #000; /* Black background */
+    font-family: 'DM Sans', sans-serif;
+  }
+  
+  .login-container {
+    margin-top: 20%;
+    background-color: rgba(255, 255, 255, 0.1); /* Transparent background */
+    color: #d3d3d3;
+    border-radius: 15px;
+    padding: 40px;
+    margin-top:160px;
+    
+    max-width: 400px;
+    width: 100%;
+    border: 2px solid rgba(1, 134, 218, 0.8); /* Simple border */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .login-heading {
+    color: #ffffff;
+    font-size: 2em;
+    margin-bottom: 20px;
+  }
+  
+  .login-form .form-group {
+    margin-bottom: 20px;
+    width: 100%;
+  }
+  
+  .login-form label {
+    display: block;
+    font-size: 1.1em;
+    margin-bottom: 5px;
+  }
+  
+  .login-form input[type="text"],
+  .login-form input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    background-color: #333;
+    color: #fff;
+    font-size: 1em;
+    outline: none;
+  }
+  
+  .login-form input[type="text"]:focus,
+  .login-form input[type="password"]:focus {
+    border-color: rgba(1, 134, 218, 0.8);
+    box-shadow: 0 0 10px rgba(1, 134, 218, 0.5);
+  }
+  
+  .error-message {
+    color: #ff6f61;
+    font-size: 0.9em;
+  }
+  
+  .success-message {
+    color: #50C878;
+    font-size: 1.1em;
+    margin-top: 10px;
+  }
+  
+  .btn-login {
+    width: 100%;
+    padding: 12px;
+    background-image: linear-gradient(to right, rgb(1, 134, 218), rgb(182, 49, 167));
+    border: none;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .btn-login:hover {
+    background-image: linear-gradient(to right, rgb(182, 49, 167), rgb(1, 134, 218));
+    box-shadow: 0 0 15px rgba(182, 49, 167, 0.5), 0 0 15px rgba(1, 134, 218, 0.5);
+  }

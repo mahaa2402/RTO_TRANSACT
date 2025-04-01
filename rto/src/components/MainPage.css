@@ -1,0 +1,27 @@
+/* MainPage.css */
+html, body {
+  height: 100%;
+  width: 100%; /* Ensure the body takes full width */
+  margin: 0; /* Remove default margin */
+  overflow: hidden; /* Hide overflow on the body to prevent page scrollbars */
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width:210vh; /* Full viewport height */
+}
+
+.content {
+  flex: 1; /* Takes the remaining space */
+  padding: 20px; /* Adjust this value as needed */
+  overflow-y: auto; /* Allow vertical scrolling within the content area */
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+  box-sizing: border-box; /*/* Prevent horizontal scrolling */
+}
+
+/* Component styles */
+.homepage, .service, .vehicle-service {
+  margin-bottom: 20px; /* Adjust spacing as needed */
+}

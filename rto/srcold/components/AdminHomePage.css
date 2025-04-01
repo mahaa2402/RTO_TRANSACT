@@ -1,0 +1,92 @@
+/* General container styling */
+/* General container styling */
+.dashboard-container {
+  padding: 40px;
+  max-width: 1200px; /* Keep this or adjust as needed */
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh; /* Ensure it takes full height */
+  overflow: auto; /* Allow scrolling if content overflows */
+}
+
+/* Title styles */
+.dashboard-title {
+  font-size: 36px;
+  margin-bottom: 40px;
+  color: #333;
+}
+
+/* Center grid and style the cards */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+  justify-content: center; /* Centers the boxes horizontally */
+  width: 100%; /* Ensure the grid uses full width */
+}
+
+/* Additional card and hover styles remain unchanged */
+
+  
+  /* Styling for each dashboard card */
+  .dashboard-card {
+    padding: 40px;
+    border-radius: 15px;
+    border: 3px solid #cb1919; /* Added border */
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    color: white;
+    text-align: center;
+  }
+  
+  /* Card headings */
+  .dashboard-card h2 {
+    margin-bottom: 15px;
+    font-size: 20px;
+    text-transform: uppercase;
+  }
+  
+  /* Card numbers */
+  .dashboard-card p {
+    font-size: 40px;
+    font-weight: bold;
+    margin: 0;
+  }
+  
+  /* Add background colors for each card */
+  .card1 {
+    background-color: #ffeaa7; /* Light Yellow */
+    border-color: #fdcb6e; /* Orange Border */
+  }
+  
+  .card2 {
+    background-color: #81ecec; /* Light Blue */
+    border-color: #74b9ff; /* Blue Border */
+  }
+  
+  .card3 {
+    background-color: #a29bfe; /* Light Purple */
+    border-color: #6c5ce7; /* Purple Border */
+  }
+  
+  .card4 {
+    background-color: #fab1a0; /* Light Red */
+    border-color: #ff7675; /* Red Border */
+  }
+  
+  /* Hover effect for the cards */
+  .dashboard-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+  }
+  
+  /* Add media query for responsive layout */
+  @media (max-width: 768px) {
+    .dashboard-grid {
+      grid-template-columns: 1fr; /* Switch to 1 column on small screens */
+    }
+  }
+  

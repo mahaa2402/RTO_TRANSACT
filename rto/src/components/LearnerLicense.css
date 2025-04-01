@@ -1,0 +1,193 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  background-color: black;
+  color: #fff; /* Change to visible color */
+  overflow: auto;
+  
+}
+
+.learner-license-container {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* Change this to space-between or center if needed */
+  align-items: center; /* This may help center the content */
+  
+  max-height: 100vh; /* Ensure this is set to 100vh */
+  box-sizing: border-box;
+}
+
+.form-container {
+  color: #999;
+  padding: 10px;
+  margin: 20px;
+  border-radius: 20px;
+  background-color: #46454580;
+  position: relative;
+  border: 5px solid transparent;
+  border-image: linear-gradient(to right, rgb(1, 134, 218), rgb(182, 49, 167)) 1;
+  transition: box-shadow 0.3s ease;
+  max-width: 600px;
+  width: 100%;
+}
+
+  /*
+
+.heading {
+  color:#d3d3d3ad; 
+  font-size: 4em; 
+  margin-left: 20px;
+  margin-bottom: 90px;
+  text-shadow: 0 0 5px rgba(112, 111, 111, 0.551); 
+}
+*/
+
+.heading {
+    color: #d3d3d3ad; /* Set heading color */
+    font-size: 4em; /* Adjust font size for the heading */
+    margin-left: 20px;
+    margin-bottom: 90px; /* Add space below the heading */
+    text-shadow: 0 0 5px rgba(112, 111, 111, 0.551); /* Add initial blur effect */
+    transition: text-shadow 0.3s ease; /* Smooth transition for the hover effect */
+  }
+  
+  .heading:hover {
+    text-shadow: 0 0 15px rgba(1, 134, 218, 0.5), 0 0 25px rgba(182, 49, 167, 0.5); /* Glowing hover effect */
+  }
+  
+  
+  .paragraph {
+    color:#d3d3d3b0; /* Set paragraph color to blue */
+    font-size: 1.1em; /* Adjust font size for the paragraph */
+    margin-left: 100px;
+    margin-right: 100px;
+  }
+  
+  /*.form-container {
+    border: 2px solid #fff;
+    color: #cccccc;
+    padding: 70px;
+    margin: 200px;
+    margin-top: 50px;
+    border-radius: 8px;
+    background-color: #46454580;
+  }*/
+  
+  .form-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    width: 48%;
+  }
+  
+  label {
+    margin-bottom: 5px;
+  }
+  
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="file"] {
+    padding: 8px;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    background-color: #333;
+    color: #fff;
+  }
+  
+  input[type="text"]:focus,
+  input[type="email"]:focus,
+  input[type="tel"]:focus,
+  input[type="file"]:focus {
+    outline: none;
+    border-color: #ff6f61;
+  }
+  
+  small {
+    color: #999;
+  }
+ 
+
+  :root {
+    /* violet */
+    --primary-color: 111, 76, 255;
+    
+    /* white */
+    --text-color: 256, 256, 256;
+  }
+
+  
+
+  .btn-glow:hover {
+    box-shadow: rgba(var(--primary-color), 0.5) 0px 0px 20px 0px;
+  }
+
+  .btn {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 18px;
+    padding: 12px 32px;
+    margin: 1rem;
+    margin-left: 42%;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    border-radius: 50px;
+  }
+  
+  .btn:hover {
+    transition: all 0.3s ease;
+  }
+
+  .btn-gradient {
+    background-image: linear-gradient(to right, rgb(1 134 218), rgb(182 49 167));
+    border: 0;
+    color: rgba(var(--text-color));
+  }
+
+
+
+  .form-container {
+    color: #999;
+    padding: 50px;
+    margin: 200px;
+    margin-top: 50px;
+    border-radius: 20px;
+    background-color: #46454580;
+    position: relative;
+    border: 5px solid transparent;
+    border-image: linear-gradient(to right, rgb(1, 134, 218), rgb(182, 49, 167)) 1;
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .form-container:before {
+    content: "";
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    right: -4px;
+    bottom: -4px;
+    z-index: -1;
+    border-radius: 20px;
+    background-image: linear-gradient(to right, rgb(1, 134, 218), rgb(182, 49, 167));
+  }
+  
+  .form-container:hover {
+    box-shadow: 0 0 25px rgba(1, 134, 218, 0.5), 0 0 25px rgba(182, 49, 167, 0.5);
+  }
+
+  .instructions {
+    line-height: 1.6; /* Increase line height for readability */
+    margin: 20px;
+    margin-left: 300px;
+    padding: 20px;
+    color: #d3d3d3b0;
+    font-size: 1.1em;
+    
+    text-align: left; /* Align text to the left */
+  }

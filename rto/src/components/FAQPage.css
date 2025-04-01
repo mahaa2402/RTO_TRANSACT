@@ -1,0 +1,92 @@
+/* Wrapper for the entire page */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%; /* Ensures the body fills the full viewport height */
+}
+
+.page-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Ensures the page takes at least the full height of the viewport */
+}
+
+/* Main content area to take up available space */
+.main-content {
+  flex: 1; /* Pushes the footer to the bottom */
+}
+
+/* FAQ Page Styles */
+.faq-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: black;
+  padding: 120px;
+  animation: fadeIn 1s ease-in-out;
+}
+
+.faq-title {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #d3d3d3ad;
+}
+
+.faq-list {
+  width: 80%;
+  max-width: 800px;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.faq-item {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 15px;
+  padding: 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.faq-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.faq-item h3 {
+  margin: 0 0 10px;
+  color: #0078d4;
+}
+
+.faq-item p {
+  margin: 0;
+  color: #555;
+}
+
+/* Footer Styles */
+.footer {
+  width: 100%;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 55px 0;
+  margin-top: auto; /* Ensures footer stays at the bottom */
+}
+
+.footer-content p {
+  margin: 5px 0;
+}
+
+/* Animation for page load */
+@keyframes fadeIn {
+  from {
+      opacity: 0;
+      transform: translateY(20px);
+  }
+  to {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}

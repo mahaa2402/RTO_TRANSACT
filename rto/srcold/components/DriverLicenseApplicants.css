@@ -1,0 +1,79 @@
+/* Container styling */
+div {
+    padding: 20px;
+    max-width: 900px; /* Increased width for better visibility */
+    margin: 0 auto;
+    font-family: 'Arial', sans-serif;
+    background-color: #f9f9f9; /* Light background color for the container */
+    border-radius: 8px; /* Rounded corners for the container */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for a floating effect */
+}
+
+/* Table styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: #ffffff; /* White background for the table */
+    border-radius: 8px; /* Rounded corners for the table */
+    overflow: hidden; /* Hide overflow for rounded corners */
+    border: 2px solid #007bff; /* Blue border around the table */
+    transform: scale(1); /* Initial scale for table */
+    transition: transform 0.3s ease-in-out; /* Smooth scale transition */
+}
+
+/* Table header styling */
+thead {
+    background-color: #007bff; /* Primary color for the header */
+    color: #ffffff; /* White text color for header */
+}
+
+th {
+    padding: 15px; /* Increased padding for better readability */
+    text-align: left;
+    border-bottom: 2px solid #0056b3; /* Darker shade for bottom border */
+    font-size: 16px; /* Larger font size for headers */
+    border-right: 1px solid #0056b3; /* Border between columns */
+}
+
+/* Table cell styling */
+td {
+    padding: 15px; /* Increased padding for consistency with headers */
+    border-bottom: 1px solid #ddd;
+    font-size: 14px; /* Font size for table cells */
+    border-right: 1px solid #ddd; /* Border between columns */
+}
+
+/* Table row styling */
+tr:nth-child(even) {
+    background-color: #f4f4f4; /* Slightly darker background for even rows */
+}
+
+/* Table row hover effect */
+tr:hover {
+    background-color: #e0e0e0;
+    transform: translateY(-2px); /* Lift effect on hover */
+    transition: transform 0.2s ease-in-out; /* Smooth transition for lift effect */
+}
+
+/* Heading styling */
+h2 {
+    color: #333;
+    font-size: 26px; /* Larger font size for headings */
+    border-bottom: 3px solid #007bff; /* Thicker bottom border with primary color */
+    padding-bottom: 12px; /* Increased padding for better spacing */
+    margin-bottom: 20px;
+    text-transform: uppercase; /* Uppercase text for headings */
+    letter-spacing: 1px; /* Spacing between letters for a modern look */
+}
+
+/* Responsive table */
+@media (max-width: 768px) {
+    table {
+        font-size: 12px; /* Smaller font size for smaller screens */
+    }
+    
+    th, td {
+        padding: 10px; /* Reduced padding for smaller screens */
+    }
+}

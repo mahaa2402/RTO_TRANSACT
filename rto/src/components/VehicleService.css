@@ -1,0 +1,120 @@
+/* Container to hold all service boxes */
+.main {
+    
+    height: 100vh; /* Full viewport height */
+    background-color:black; /* Optional: Set a background color */
+    font-family: Arial, sans-serif; 
+    
+    height: 60vh;
+    margin-top: 100px;
+
+
+  }
+  
+  /* Title styling */
+  .title2 {
+    text-align: center;
+    color: #d3d3d3ad; /* Text color */
+    /* Softer inner glow */
+    padding-top: 160px;
+      font-size: 40px;
+  }
+  
+  
+ 
+  
+  /* Container to align service boxes */
+ /* Container to align service boxes */
+.service-container {
+  display: flex;
+  gap: 40px; /* Reduced gap between boxes */
+  justify-content: space-around; /* Space around service boxes */
+  flex-wrap: wrap; /* Allow boxes to wrap to new lines if needed */
+  /* Space between service boxes */
+  margin-top: 30px;
+}
+
+  /* Styling each service box */
+  .service-box {
+    width: 200px; /* Adjust width as needed */
+    height: 220px; /* Adjust height to make sure it's fully visible */
+    /* ... other styles */
+    border:3px solid transparent;
+    border-image: linear-gradient(to right, rgb(1, 134, 218), rgb(182, 49, 167)) 1;
+    transition: box-shadow 0.3s ease;
+    text-align: center;
+    color: #d3d3d3ad;
+    text-shadow: 0 0 8px rgba(112, 111, 111, 0.551); 
+    padding:20px;
+    font-size: 20%;
+  
+    font-size: 10px;
+ /* Optional: Background color for the box */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover effects */
+    animation: border-animation 5s infinite linear;
+  }
+  
+  .service-box button
+  {
+    margin-left:20px;
+  }
+  /* Hover effects for service boxes */
+  .service-box:hover {
+    transform: scale(1.05); /* Slightly scale up the box on hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Add shadow on hover */
+  }
+
+  .service-box h1 {
+    font-size: 2.0em; /* Adjust this value to increase the font size */
+  }
+  .service-box p {
+    font-size: 1.0em; /* Adjust this value to increase the font size */
+  }
+  
+  .service-box img {
+    max-width: 100%; /* Ensure image fits within the box */
+    height: 40%; /* Maintain aspect ratio of the image */
+    margin-bottom: 10px; /* Space between image and heading */
+    border-radius: 40%
+  }
+  @keyframes border-animation {
+    0% {
+      border-image-slice: 1;
+    }
+    100% {
+      border-image-slice: 0;
+    }
+  }
+  
+  .btn-glow:hover {
+    box-shadow: rgba(var(--primary-color), 0.5) 0px 0px 20px 0px;
+  }
+
+  .btn {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 18px;
+    margin-top: 20%;
+    margin: 1rem;
+    margin-left: 10%;
+    cursor: pointer;
+    width: 100px;
+    height: auto; /* Changed from percentage to auto to fit content */
+    text-align: center;
+    padding: 9px; /* Added padding for better spacing */
+    transition: all 0.3s ease;
+    border-radius: 10%; /* Adjust if needed */
+  }
+  
+  .btn:hover {
+    background-color: rgba(0, 0, 0, 0.1); /* Optional hover effect */
+    transform: scale(1.05); /* Optional hover effect */
+  }
+  
+  .btn-gradient {
+    background-image: linear-gradient(to right, rgb(1, 134, 218), rgb(182, 49, 167));
+    border: 0;
+    color: black;
+    font-weight: bold;
+    text-transform: none;
+  }
+  

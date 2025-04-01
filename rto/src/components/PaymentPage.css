@@ -1,0 +1,74 @@
+.payment-container {
+    width: 80%;
+    margin: 0 auto;
+    font-family: Arial, sans-serif;
+    text-align: center;
+  }
+  
+  .payment-title {
+    margin-bottom: 20px;
+    color: #d35400;
+  }
+  
+  .payment-table td {
+    background: transparent !important;
+    color: white; /* Ensure text is visible */
+  }
+  
+  /* Remove the white background from disabled or inactive cells */
+  .payment-table td:disabled, 
+  .payment-table td[disabled] {
+    background: transparent !important;
+    color: rgba(255, 255, 255, 0.5); /* Dim the text for disabled rows */
+  }
+  .payment-table tr:nth-child(even) td {
+    background-color: #333 !important; /* Darker background for even rows */
+    color: white !important; /* Ensure text is visible */
+    opacity: 1; /* Make sure opacity is not causing the issue */
+  }
+  
+  /* If the row has been set to disabled or low opacity */
+  .payment-table tr:nth-child(even) {
+    opacity: 1 !important; /* Ensure row is fully visible */
+  }
+  
+  
+  /* Optional: Apply styling for grand total row */
+  .payment-table tr:last-child {
+    background: #444; /* Darker shade for distinction */
+    font-weight: bold;
+  }
+  
+  
+  .total-label {
+    text-align: right;
+    font-weight: bold;
+  }
+  
+  .summary {
+    margin: 10px 0;
+  }
+  
+  .button-group {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  .pay-button, .back-button {
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .pay-button {
+    background-color: #3498db;
+    color: white;
+  }
+  
+  .back-button {
+    background-color: #95a5a6;
+    color: white;
+  }
+  
