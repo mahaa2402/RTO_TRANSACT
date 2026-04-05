@@ -1,0 +1,9 @@
+# Netlify: static deploy of the Create React App in /rto
+# API (server.js) must be hosted separately; set REACT_APP_API_URL in Netlify UI.
+
+[build]
+  command = "npm run build"
+  publish = "rto/build"
+
+[build.environment]
+  NODE_VERSION = "20"

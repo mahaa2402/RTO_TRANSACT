@@ -6,6 +6,7 @@
     "start": "node server.js",
     "server": "node server.js",
     "client": "npm start --prefix rto",
+    "build": "npm install --prefix rto && npm run build --prefix rto",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
