@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { API_BASE } from '../api/client';
 import './VehiclePermit.css';
 
 const VehiclePermit = () => {
@@ -46,7 +47,7 @@ const VehiclePermit = () => {
     });
 
     try {
-      const response = await fetch('http://localhost:3001/vehicle-permit', {
+      const response = await fetch(`${API_BASE}/vehicle-permit`, {
         method: 'POST',
         body: formDataObj,
       });

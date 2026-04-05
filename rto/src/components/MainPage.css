@@ -1,27 +1,24 @@
-/* MainPage.css */
-html, body {
-  height: 100%;
-  width: 100%; /* Ensure the body takes full width */
-  margin: 0; /* Remove default margin */
-  overflow: hidden; /* Hide overflow on the body to prevent page scrollbars */
-}
-
-.App {
+/* Main layout: sidebar offset + scrollable content */
+.main-layout {
   display: flex;
   flex-direction: column;
-  height: 100vh;
-  width:210vh; /* Full viewport height */
+  min-height: 100vh;
+  margin-left: var(--content-offset);
+  transition: margin-left 0.25s ease;
 }
 
-.content {
-  flex: 1; /* Takes the remaining space */
-  padding: 20px; /* Adjust this value as needed */
-  overflow-y: auto; /* Allow vertical scrolling within the content area */
-  overflow-x: hidden; /* Prevent horizontal scrolling */
-  box-sizing: border-box; /*/* Prevent horizontal scrolling */
+.main-layout--sidebar-open {
+  margin-left: var(--sidebar-expanded);
 }
 
-/* Component styles */
-.homepage, .service, .vehicle-service {
-  margin-bottom: 20px; /* Adjust spacing as needed */
+.main-layout__content {
+  flex: 1;
+  padding: 1.25rem 1.5rem 2rem;
+  overflow-x: hidden;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+.main-layout__section {
+  margin-bottom: 2rem;
 }

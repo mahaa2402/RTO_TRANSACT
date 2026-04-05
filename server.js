@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const multer = require('multer');
-const { MongoClient } = require('mongodb');
+const { MongoClient, ObjectId } = require('mongodb');
 const bcrypt = require('bcrypt'); // Import bcrypt for hashing passwords
 const path = require('path');
 const { v4: uuidv4 } = require('uuid');
@@ -31,12 +31,10 @@ app.use(bodyParser.urlencoded({ extended: true }));  // Handle URL-encoded form 
 app.use(express.static(path.join(__dirname, 'public')));  // Serve static files (e.g., images, documents)
 
 
-mongoose.connect('mongodb://localhost:27017/RTO', { 
-  useNewUrlParser: true, 
-  useUnifiedTopology: true 
-})
-.then(() => console.log('Connected to MongoDB'))
-.catch(err => console.error('MongoDB connection error:', err));
+mongoose
+  .connect('mongodb://localhost:27017/RTO')
+  .then(() => console.log('Connected to MongoDB'))
+  .catch((err) => console.error('MongoDB connection error:', err));
 
 
 // Multer configuration for file uploads
@@ -178,29 +176,6 @@ app.post('/admin-login', async (req, res) => {
   } catch (error) {
     console.error('Error during admin login:', error);
     res.status(500).json({ success: false, message: 'Login failed. Please try again.' });
-  }
-});
-
-
-   
-   
-app.get('/vehicle-owners', async (req, res) => {
-  try {
-    const vehiclesCollection = db.collection('vehicles');
-    const vehicleOwners = await vehiclesCollection.find({}, {
-      projection: {
-        ownerName: 1,
-        ownerContact: 1,
-        ownerAadhar: 1,
-        vehicleIDNumber: 1,
-      }
-    }).toArray();
-
-    // Respond with the vehicle owners' data
-    res.json({ success: true, data: vehicleOwners });
-  } catch (error) {
-    console.error('Error fetching vehicle owners:', error);
-    res.status(500).json({ success: false, message: 'Error fetching vehicle owners data' });
   }
 });
 app.get('/drivers-license-applicants', async (req, res) => {
@@ -412,19 +387,8 @@ app.post('/duplicate-license', async (req, res) => {
 });
 
 
-// Route to fetch all fines
-app.get('/api/fines', async (req, res) => {
-  try {
-    const fines = await db.collection('fines').find({}).toArray(); // Fetch all fines
-    res.json(fines); // Respond with the fines
-  } catch (error) {
-    console.error('Error fetching fines:', error);
-    res.status(500).json({ success: false, message: 'Failed to fetch fines' });
-  }
-});
-
 // Vehicle Permit route
-app.post('/vehicle-permit', upload.fields([{ name: 'idProof' }, { name: 'insurance' }]), (req, res) => {
+app.post('/vehicle-permit', upload.fields([{ name: 'idProof' }, { name: 'insurance' }]), async (req, res) => {
   const {
     applicantName,
     vehicleMake,
@@ -465,11 +429,18 @@ app.post('/vehicle-permit', upload.fields([{ name: 'idProof' }, { name: 'insuran
     insurance,
   };
 
-  const permitsCollection = db.collection('vehicle_permits');
-
-  permitsCollection.insertOne(vehiclePermitData)
-    .then(() => res.json({ success: true, message: 'Vehicle permit submitted successfully!' }))
-    .catch(err => res.status(500).json({ success: false, message: 'Error submitting vehicle permit' }));
+  try {
+    const dbo = mongoose.connection.db;
+    if (!dbo) {
+      return res.status(503).json({ success: false, message: 'Database not ready' });
+    }
+    const permitsCollection = dbo.collection('vehicle_permits');
+    await permitsCollection.insertOne(vehiclePermitData);
+    return res.json({ success: true, message: 'Vehicle permit submitted successfully!' });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ success: false, message: 'Error submitting vehicle permit' });
+  }
 });
 
 // Vehicle registration route
@@ -526,7 +497,19 @@ app.post('/vehicle-registration', upload.fields([{ name: 'photo' }, { name: 'idP
   }
 });
 
-
+// Vehicle owners list (Mongoose — same data as registrations)
+app.get('/vehicle-owners', async (req, res) => {
+  try {
+    const vehicleOwners = await Vehicle.find(
+      {},
+      { ownerName: 1, ownerContact: 1, ownerAadhar: 1, vehicleIDNumber: 1 }
+    ).lean();
+    res.json({ success: true, data: vehicleOwners });
+  } catch (error) {
+    console.error('Error fetching vehicle owners:', error);
+    res.status(500).json({ success: false, message: 'Error fetching vehicle owners data' });
+  }
+});
 
 // Route to retrieve all fines for a specific vehicle
 app.get('/api/fines/:vehicleNumber', async (req, res) => {
@@ -571,70 +554,49 @@ app.post("/api/fines", async (req, res) => {
   }
 });
 
-// Route to mark a fine as paid
+// Route to mark a fine as paid (by MongoDB _id)
 app.put('/api/fines/:fineId/pay', async (req, res) => {
   const { fineId } = req.params;
   try {
-    await db.collection('fines').updateOne(
-      { _id: new MongoClient.ObjectID(fineId) },
+    if (!ObjectId.isValid(fineId)) {
+      return res.status(400).json({ success: false, message: 'Invalid fine id' });
+    }
+    const dbo = mongoose.connection.db;
+    if (!dbo) {
+      return res.status(503).json({ success: false, message: 'Database not ready' });
+    }
+    const result = await dbo.collection('fines').updateOne(
+      { _id: new ObjectId(fineId) },
       { $set: { status: 'Paid' } }
     );
+    if (result.matchedCount === 0) {
+      return res.status(404).json({ success: false, message: 'Fine not found' });
+    }
     res.json({ success: true, message: 'Fine marked as paid' });
   } catch (error) {
     console.error('Error marking fine as paid:', error);
     res.status(500).json({ success: false, message: 'Failed to mark fine as paid' });
   }
 });
-app.put('/api/fines/pay/:vehicleNumber', async (req, res) => {
-  try {
-    const { vehicleNumber } = req.params;
-    const { status } = req.body; // Make sure the body contains the correct 'status' field
-
-    // Update the status of the fine in the database
-    const updatedFine = await Fine.findOneAndUpdate(
-      { vehicleNumber },         // Match by vehicleNumber
-      { status },                // Update the status field
-      { new: true }              // Return the updated document
-    );
-
-    if (!updatedFine) {
-      return res.status(404).json({ message: 'Fine not found' });
-    }
-
-    res.status(200).json(updatedFine); // Send the updated fine back
-  } catch (error) {
-    console.error('Error updating fine status:', error);
-    res.status(500).json({ message: 'Failed to update fine status' });
-  }
-});
-
-
 
 // Route to get violations of a specific driver
 app.get('/api/violations/:driverId', async (req, res) => {
   const { driverId } = req.params;
   try {
-    const violations = await db.collection('violations').find({ driverId }).toArray();
+    const dbo = mongoose.connection.db;
+    if (!dbo) {
+      return res.status(503).json({ success: false, message: 'Database not ready' });
+    }
+    const violations = await dbo.collection('violations').find({ driverId }).toArray();
     res.json(violations);
   } catch (error) {
     console.error('Error fetching violations:', error);
     res.status(500).json({ success: false, message: 'Failed to retrieve violations' });
   }
 });
-const uri = 'mongodb://localhost:27017'; // Update with your MongoDB URI if needed
 
 async function insertSampleData() {
-  try {
-    // Connect to the MongoDB server
-    await client.connect();
-    
-
-
-
-    // Select the "RTO" database
-    const db = client.db('RTO');
-
-    const finesData = [
+  const finesData = [
       {
         vehicleNumber: 'KA01AB1234',
         fineAmount: 500,
@@ -683,63 +645,55 @@ async function insertSampleData() {
       }
     ];
 
-    const finesCollection = db.collection('fines');
-    const violationsCollection = db.collection('violations');
+  const runInsert = async () => {
+    try {
+      const dbo = mongoose.connection.db;
+      if (!dbo) return;
+      const finesCollection = dbo.collection('fines');
+      const violationsCollection = dbo.collection('violations');
+      const existingFines = await finesCollection.estimatedDocumentCount();
+      if (existingFines > 0) return;
+      await finesCollection.insertMany(finesData);
+      await violationsCollection.insertMany(violationsData);
+      console.log('Sample fines and violations inserted');
+    } catch (error) {
+      console.error('Failed to insert sample data:', error);
+    }
+  };
 
-    // Insert sample fines
-    await finesCollection.insertMany(finesData);
-    
-
-    // Insert sample violations
-    await violationsCollection.insertMany(violationsData);
-   
-  } catch (error) {
-    console.error('Failed to insert sample data:', error);
-  } 
+  if (mongoose.connection.readyState === 1) {
+    await runInsert();
+  } else {
+    mongoose.connection.once('connected', () => {
+      runInsert();
+    });
+  }
 }
 
-// Call the function to insert sample data
 insertSampleData();
 
 app.get('/api/fines', async (req, res) => {
   try {
-    const fines = await db.collection('fines').find({}).toArray(); // Fetch all fines
-    res.json(fines); // Respond with the fines
+    const fines = await Fine.find().lean();
+    res.json(fines);
   } catch (error) {
     console.error('Error fetching fines:', error);
     res.status(500).json({ success: false, message: 'Failed to fetch fines' });
   }
 });
-app.put('/api/fines/pay/:vehicleNumber', async (req, res) => {
-  const { vehicleNumber } = req.params;
-  const { status } = req.body; // Expect status in the request body ('Paid' or 'Unpaid')
-
-  try {
-    const result = await db.collection('fines').updateOne(
-      { vehicleNumber: vehicleNumber },  // Match by vehicleNumber
-      { $set: { status: status } }       // Set the new status based on the request
-    );
-
-    if (result.modifiedCount > 0) {
-      res.json({ success: true, message: `Fine status updated to ${status}` });
-    } else {
-      res.status(404).json({ success: false, message: 'Fine not found for this vehicle' });
-    }
-  } catch (error) {
-    console.error('Error updating fine status:', error);
-    res.status(500).json({ success: false, message: 'Failed to update fine status' });
-  }
-});
 // API endpoint to fetch violations
 app.get('/api/violations', async (req, res) => {
-    try {
-        const violations = await db.collection('violations').find({}).toArray(); // Fetch all violations
-        console.log('Fetched Violations:', violations); // Print the fetched violations to console
-        res.json(violations); // Respond with the violations
-    } catch (error) {
-        console.error('Error fetching violations:', error);
-        res.status(500).json({ success: false, message: 'Failed to fetch violations' });
+  try {
+    const dbo = mongoose.connection.db;
+    if (!dbo) {
+      return res.status(503).json({ success: false, message: 'Database not ready' });
     }
+    const violations = await dbo.collection('violations').find({}).toArray();
+    res.json(violations);
+  } catch (error) {
+    console.error('Error fetching violations:', error);
+    res.status(500).json({ success: false, message: 'Failed to fetch violations' });
+  }
 });
 
 
@@ -753,6 +707,7 @@ const appointmentSchema = new mongoose.Schema({
   enginePerformance: String,
   appointmentDate: String,
   appointmentTime: String,
+  status: { type: String, default: 'Pending' },
 });
 
 // Create a Model
@@ -780,6 +735,28 @@ app.get('/appointments', async (req, res) => {
   }
 });
 
+// Mark appointment as fixed (admin)
+app.put('/appointments/fix/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const nextStatus = req.body?.status || 'Fixed';
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ success: false, message: 'Invalid appointment id' });
+    }
+    const updated = await Appointment.findByIdAndUpdate(
+      id,
+      { $set: { status: nextStatus } },
+      { new: true }
+    );
+    if (!updated) {
+      return res.status(404).json({ success: false, message: 'Appointment not found' });
+    }
+    res.json({ success: true, data: updated });
+  } catch (error) {
+    console.error('Error updating appointment:', error);
+    res.status(500).json({ success: false, message: 'Failed to update appointment.' });
+  }
+});
 
 // Define the schema for payments
 const paymentSchema = new mongoose.Schema({
@@ -808,9 +785,21 @@ const Payment = mongoose.model('Payment', paymentSchema);app.post('/api/payments
 });
 
 
-// Start the server
-app.listen(3001, () => {
-  console.log('Backend server is running on port 3001');
+app.use(router);
+
+const server = app.listen(PORT, () => {
+  console.log(`Backend server is running on port ${PORT}`);
 });
 
-app.use(router);
+server.on('error', (err) => {
+  if (err.code === 'EADDRINUSE') {
+    console.error(
+      `Port ${PORT} is already in use. Stop the other process or run:\n` +
+        `  netstat -ano | findstr ":${PORT}"\n` +
+        `  taskkill /PID <pid> /F`
+    );
+  } else {
+    console.error('Server error:', err);
+  }
+  process.exit(1);
+});

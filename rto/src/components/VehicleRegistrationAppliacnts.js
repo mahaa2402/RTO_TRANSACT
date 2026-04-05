@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { API_BASE } from "../api/client";
 
 const VehicleOwners = () => {
   const [vehicleData, setVehicleData] = useState([]);
@@ -8,7 +9,7 @@ const VehicleOwners = () => {
   useEffect(() => {
     const fetchVehicleOwnersData = async () => {
       try {
-        const response = await fetch('http://localhost:3001/vehicle-owners');
+        const response = await fetch(`${API_BASE}/vehicle-owners`);
         const result = await response.json();
 
         if (result.success) {
@@ -49,12 +50,7 @@ const VehicleOwners = () => {
         </thead>
         <tbody>
           {vehicleData.map((item) => (
-            <tr key={item._id}> {/* Use _id for MongoDB ID */}
-              <td>{item.ownerName}</td>
-              <td>{item.ownerContact}</td>
-              <td>{item.ownerAadhar}</td>
-              <td>{item.vehicleIDNumber}</td>
-            </tr>
+            <tr key={item._id}><td>{item.ownerName}</td><td>{item.ownerContact}</td><td>{item.ownerAadhar}</td><td>{item.vehicleIDNumber}</td></tr>
           ))}
         </tbody>
       </table>

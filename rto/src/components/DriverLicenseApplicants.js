@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { API_BASE } from "../api/client";
 import "./FetchViolations.css";
 
 const DrivingLicenseApplicants = () => {
@@ -9,7 +10,7 @@ const DrivingLicenseApplicants = () => {
   useEffect(() => {
     const fetchApplicantsData = async () => {
       try {
-        const response = await fetch('http://localhost:3001/drivers-license-applicants');
+        const response = await fetch(`${API_BASE}/drivers-license-applicants`);
         const result = await response.json();
 
         if (result.success) {
@@ -50,12 +51,7 @@ const DrivingLicenseApplicants = () => {
         </thead>
         <tbody>
           {detailedData.map((item) => (
-            <tr key={item._id}> {/* Use _id for MongoDB ID */}
-              <td>{item.firstName}</td>
-              <td>{item.lastName}</td>
-              <td>{item.phoneNumber}</td>
-              <td>{item.email}</td>
-            </tr>
+            <tr key={item._id}><td>{item.firstName}</td><td>{item.lastName}</td><td>{item.phoneNumber}</td><td>{item.email}</td></tr>
           ))}
         </tbody>
       </table>

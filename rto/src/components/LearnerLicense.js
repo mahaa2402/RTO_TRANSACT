@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { API_BASE } from '../api/client';
 import './LearnerLicense.css';
 
 const LearnerLicense = () => {
@@ -46,7 +47,7 @@ const LearnerLicense = () => {
     formDataToSubmit.append('photo', formData.photo);
     formDataToSubmit.append('idProof', formData.idProof);
 
-    fetch('http://localhost:3001/learners-license', {
+    fetch(`${API_BASE}/learners-license`, {
       method: 'POST',
       body: formDataToSubmit,
     })

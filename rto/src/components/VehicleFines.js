@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import { api } from '../api/client';
 
 const VehicleFines = () => {
   const [fines, setFines] = useState([]); // Store fines data
@@ -13,7 +13,7 @@ const VehicleFines = () => {
     setError(null); // Reset previous error
 
     try {
-      const response = await axios.get(`http://localhost:3001/api/fines/${vehicleNumber}`);
+      const response = await api.get(`/api/fines/${vehicleNumber}`);
       setFines(response.data); // Set the fines data
     } catch (err) {
       console.error('Error fetching fines:', err);
@@ -28,7 +28,7 @@ const VehicleFines = () => {
     const newStatus = currentStatus === 'Paid' ? 'Unpaid' : 'Paid'; // Toggle status
 
     try {
-      const response = await axios.put(`http://localhost:3001/api/fines/pay/${id}`, { status: newStatus });
+      const response = await api.put(`/api/fines/pay/${id}`, { status: newStatus });
 
       // Update the fine status locally
       setFines(prevFines =>

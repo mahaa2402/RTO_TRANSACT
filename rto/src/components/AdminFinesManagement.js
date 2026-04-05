@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import { api } from '../api/client';
 
 const AdminFinesManagement = () => {
   const [fines, setFines] = useState([]); // To store the fines data
@@ -10,7 +10,7 @@ const AdminFinesManagement = () => {
     // Fetch fines from the server when the component mounts
     const fetchFines = async () => {
       try {
-        const response = await axios.get('http://localhost:3001/api/fines');
+        const response = await api.get('/api/fines');
         setFines(response.data); // Set the fines data in state
         setLoading(false); // Loading done
       } catch (err) {
@@ -26,10 +26,9 @@ const AdminFinesManagement = () => {
     const newStatus = currentStatus === 'Paid' ? 'Unpaid' : 'Paid'; // Toggle status
   
     try {
-      const response = await axios.put(
-        `http://localhost:3001/api/fines/pay/${vehicleNumber}`,
-        { status: newStatus } // Send status in the request body
-      );
+      const response = await api.put(`/api/fines/pay/${vehicleNumber}`, {
+        status: newStatus,
+      });
   
       if (response.status === 200) {
         // Update the local state to reflect the new status

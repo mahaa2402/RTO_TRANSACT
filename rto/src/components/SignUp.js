@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import { toast } from 'react-toastify';
+import { api } from '../api/client';
 import './SignUp.css';
+import './UserLogin.css';
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -18,25 +20,27 @@ const SignUp = () => {
     // Frontend validation for empty fields
     if (!name || !email || !phoneNum || !password) {
       setError('All fields are required.');
+      toast.warning('Please fill in every field.');
       return;
     }
-  
+
     try {
-      const response = await axios.post('http://localhost:3001/signup', {
+      const response = await api.post('/signup', {
         name,
         email,
         phoneNum,
         password,
       });
-  
+
       const appNumber = response.data.applicationNumber;
       setApplicationNumber(appNumber);
       setError('');
-      console.log('Your application number is:', appNumber);
+      toast.success('Account created successfully.');
       setShowPopup(true);
     } catch (err) {
-      setError(err.response?.data?.error || 'Failed to sign up. Please try again.');
-      console.error('Signup error:', err);
+      const msg = err.response?.data?.error || 'Failed to sign up. Please try again.';
+      setError(msg);
+      toast.error(msg);
     }
   };
   
@@ -46,11 +50,13 @@ const SignUp = () => {
   };
 
   return (
-    <div className="login-container">
-      <h1 className="login-heading">Sign Up</h1>
-      <form className="login-form" onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="name">Full Name:</label>
+    <div className="auth-page">
+      <div className="auth-card">
+      <h1 className="auth-card__title">Create account</h1>
+      <p className="auth-card__subtitle">Register for TransAct citizen services</p>
+      <form className="auth-form login-form" onSubmit={handleSubmit}>
+        <div className="form-group auth-form__group">
+          <label htmlFor="name">Full name</label>
           <input
             type="text"
             id="name"
@@ -59,8 +65,8 @@ const SignUp = () => {
             onChange={(e) => setName(e.target.value)}
           />
         </div>
-        <div className="form-group">
-          <label htmlFor="email">Email ID:</label>
+        <div className="form-group auth-form__group">
+          <label htmlFor="email">Email</label>
           <input
             type="email"
             id="email"
@@ -69,8 +75,8 @@ const SignUp = () => {
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
-        <div className="form-group">
-          <label htmlFor="phoneNum">Phone Number:</label>
+        <div className="form-group auth-form__group">
+          <label htmlFor="phoneNum">Phone number</label>
           <input
             type="text"
             id="phoneNum"
@@ -79,8 +85,8 @@ const SignUp = () => {
             onChange={(e) => setPhoneNum(e.target.value)}
           />
         </div>
-        <div className="form-group">
-          <label htmlFor="password">Set Password:</label>
+        <div className="form-group auth-form__group">
+          <label htmlFor="password">Password</label>
           <input
             type="password"
             id="password"
@@ -89,28 +95,31 @@ const SignUp = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <button type="submit" className="btn-login">Sign Up</button>
-        <p className="success-message">
-          Already have an account? <Link to="/UserLogin">Login</Link>
+        <button type="submit" className="btn-primary auth-form__submit">Sign up</button>
+        <p className="auth-form__footer">
+          Already have an account? <Link to="/UserLogin">Sign in</Link>
+        </p>
+        <p className="auth-form__footer">
+          <Link to="/">← Back to home</Link>
         </p>
       </form>
 
-      {error && (
-        <div className="error-message">
-          <h3>{error}</h3>
+      {error && !showPopup ? <p className="auth-form__error" style={{ textAlign: 'center' }}>{error}</p> : null}
+
+      {showPopup ? (
+        <div className="signup-popup-overlay">
+          <div className="signup-popup">
+            <h2 className="signup-popup__title">Application number</h2>
+            <p className="signup-popup__number">{applicationNumber}</p>
+            <p className="signup-popup__hint">Save this reference for your records.</p>
+            <button type="button" onClick={handleLoginRedirect} className="btn-primary auth-form__submit">
+              Continue to sign in
+            </button>
+          </div>
         </div>
-      )}
+      ) : null}
 
-{showPopup && (
-  <div className="popup-overlay">
-    <div className="popup-content">
-      <h2>Your Application Number is:</h2>
-      <h3>{applicationNumber}</h3>
-      <button onClick={handleLoginRedirect} className="btn-login">Go to Login</button>
-    </div>
-  </div>
-)}
-
+      </div>
     </div>
   );
 };

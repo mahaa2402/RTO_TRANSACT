@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { API_BASE } from '../api/client';
 import './VehicleRegistration.css';
 
 const VehicleRegistration = () => {
@@ -45,7 +46,7 @@ const VehicleRegistration = () => {
     }
 
     try {
-      const response = await fetch('http://localhost:3001/vehicle-registration', {
+      const response = await fetch(`${API_BASE}/vehicle-registration`, {
         method: 'POST',
         body: formDataToSend,
       });

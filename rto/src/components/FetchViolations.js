@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import { api } from '../api/client';
 import './FetchViolations.css'; // Import the CSS stylesheet
 
 const FetchViolations = () => {
@@ -8,7 +8,7 @@ const FetchViolations = () => {
   useEffect(() => {
     const fetchViolations = async () => {
       try {
-        const response = await axios.get('http://localhost:3001/api/violations');
+        const response = await api.get('/api/violations');
         setViolations(response.data);
         console.log('Violations fetched:', response.data);
       } catch (error) {
@@ -29,7 +29,7 @@ const FetchViolations = () => {
         dateIssued: new Date().toISOString().split('T')[0], // YYYY-MM-DD format
       };
 
-      const response = await axios.post('http://localhost:3001/api/fines', fineData);
+      const response = await api.post('/api/fines', fineData);
       console.log('Fine issued:', response.data);
       alert(`Fine issued for vehicle ${violation.vehicleNumber}`);
     } catch (error) {

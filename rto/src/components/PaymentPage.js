@@ -1,5 +1,6 @@
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { API_BASE } from '../api/client';
 import './PaymentPage.css';
 
 const PaymentPage = () => {
@@ -25,7 +26,7 @@ const PaymentPage = () => {
     const paymentStatus = 'Paid';
 
     try {
-      const response = await fetch('http://localhost:3001/api/payments', {
+      const response = await fetch(`${API_BASE}/api/payments`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

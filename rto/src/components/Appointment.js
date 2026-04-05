@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './Appointment.css';
-import { useNavigate } from 'react-router-dom'; 
+import { useNavigate } from 'react-router-dom';
+import { API_BASE } from '../api/client'; 
 
 const AppointmentForm = () => {
   const [formData, setFormData] = useState({
@@ -26,7 +27,7 @@ const AppointmentForm = () => {
   const handlePayment = async () => {
     // Send the form data to the backend
     try {
-      const response = await fetch('http://localhost:3001/appointments', {
+      const response = await fetch(`${API_BASE}/appointments`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

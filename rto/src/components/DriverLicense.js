@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { API_BASE } from '../api/client';
 import './DriverLicense.css';
 
 const DriverLicense = () => {
@@ -47,7 +48,7 @@ const DriverLicense = () => {
     formDataObj.append('idProof', formData.idProof);
 
     try {
-      const response = await fetch('http://localhost:3001/drivers-license', {
+      const response = await fetch(`${API_BASE}/drivers-license`, {
         method: 'POST',
         body: formDataObj,
       });

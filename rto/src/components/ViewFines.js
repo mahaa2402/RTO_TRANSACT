@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import { api } from '../api/client';
 import './VehicleFines.css';
 
 const ViewFines = () => {
@@ -14,7 +14,7 @@ const ViewFines = () => {
     setError(null);
 
     try {
-      const response = await axios.get(`http://localhost:3001/api/fines/${vehicleNumber}`);
+      const response = await api.get(`/api/fines/${vehicleNumber}`);
       const finesData = response.data || [];
       setFines(finesData);
     } catch (err) {
@@ -30,7 +30,7 @@ const ViewFines = () => {
 
     try {
       // API request to update the fine status using vehicleNumber
-      await axios.put(`http://localhost:3001/api/fines/pay/${vehicleNum}`, { status: newStatus });
+      await api.put(`/api/fines/pay/${vehicleNum}`, { status: newStatus });
 
       // Update the status in the local state
       setFines(prevFines =>

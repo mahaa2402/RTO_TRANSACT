@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './DuplicateLicense.css';
 import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { API_BASE } from '../api/client';
 
 const DuplicateLicense = () => {
   const [formData, setFormData] = useState({
@@ -32,7 +32,7 @@ const DuplicateLicense = () => {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch('http://localhost:3001/duplicate-license', {
+      const response = await fetch(`${API_BASE}/duplicate-license`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),

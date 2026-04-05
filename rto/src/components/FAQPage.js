@@ -6,7 +6,7 @@ function FAQPage() {
   return (
     
     <div className="faq-container">
-      <h1 className="faq-title">Frequently Asked Questions (FAQ)</h1>
+      <h2 className="faq-title">Frequently asked questions</h2>
       <ul className="faq-list">
         <li className="faq-item">
           <h3>How can I apply for a duplicate license?</h3>
@@ -24,13 +24,9 @@ function FAQPage() {
           <h3>Can I check the status of my application online?</h3>
           <p>Yes, the status can be tracked on the official RTO portal.</p>
         </li>
-      </ul><br></br>
-     
+      </ul>
     </div>
   );
 }
-
-
-  
 
 export default FAQPage;

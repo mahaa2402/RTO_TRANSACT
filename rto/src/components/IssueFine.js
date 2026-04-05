@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import { toast } from 'react-toastify';
+import { api } from '../api/client';
 import './IssueFine.css';
-import { useNavigate } from 'react-router-dom'; 
-import './AdminHomePage.js';
-// Import the CSS file
+import { useNavigate } from 'react-router-dom';
 
 const IssueFine = () => {
   const [vehicleNumber, setVehicleNumber] = useState('');
@@ -15,17 +14,17 @@ const IssueFine = () => {
   const issueFine = (fineData) => {
     console.log(' Sending fine data:', fineData);
     
-    axios.post('http://localhost:3001/api/fines', fineData)
-      .then(response => {
-        console.log('Fine issued:', response.data);
-        alert(response.data.message);
+    api
+      .post('/api/fines', fineData)
+      .then((response) => {
+        toast.success(response.data.message || 'Fine recorded');
         setVehicleNumber('');
         setFineAmount('');
         setReason('');
       })
-      .catch(error => {
-        console.error('Error issuing fine:', error.response ? error.response.data : error.message);
-        alert('Failed to issue fine. Check console for details.');
+      .catch((error) => {
+        const msg = error.response?.data?.message || error.message || 'Failed to issue fine';
+        toast.error(msg);
       });
   };
   

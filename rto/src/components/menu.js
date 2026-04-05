@@ -1,83 +1,86 @@
 import React, { useState } from 'react';
 import './menu.css';
-import { Link } from 'react-router-dom';
-import FcComponent from './FcComponent';
-import Footer from './Footer';
+import { Link, NavLink } from 'react-router-dom';
 
-// Make sure to update the path
+function AppSidebar({ onExpandChange }) {
+  const [isOpen, setIsOpen] = useState(false);
 
-function Sidebar() {
-    const [isOpen, setIsOpen] = useState(false);
+  const setOpen = (next) => {
+    setIsOpen(next);
+    onExpandChange?.(next);
+  };
 
-    function toggleSidebar() {
-        setIsOpen(!isOpen);
-    }
+  const toggle = () => setOpen(!isOpen);
+  const close = () => setOpen(false);
 
-    return (
-        <div className={`sidebar ${isOpen ? 'open' : ''}`}>
-            <div className="toggle-btn" onClick={toggleSidebar}>
-                <i className={isOpen ? "fa fa-times" : "fa fa-bars"}></i>
-            </div>
-            <nav className="main-menu">
-                <div className="logo">
-                    
-                </div>
-                <ul>
-                    <li>
-                        <a href="#">
-                            <i className="fa fa-home fa-2x"></i>
-                            <span className="nav-text">Home</span>
-                        </a>
-                    </li>
-                    <li className="has-subnav">
-                    <Link to="/RtoAboutUS"> {/* Use Link instead of <a> */}
-                            <i className="fa fa-globe fa-2x"></i>
-                           <span className="nav-text">About Us</span>
-                    </Link>
-                    </li>
-                    <li className="has-subnav">
-                    <Link to="/VehicleServices"> {/* Use Link instead of <a> */}
-                            <i className="fa fa-globe fa-2x"></i>
-                           <span className="nav-text">Services</span>
-                    </Link>
-                    </li>
-                    <li className="has-subnav">
-                    <Link to="/footer"> {/* Use Link instead of <a> */}
-                            <i className="fa fa-globe fa-2x"></i>
-                           <span className="nav-text">Contact Number</span>
-                    </Link>
-                    </li>
-                    <li>
-                    <Link to="/appointments"> {/* Use Link instead of <a> */}
-                            <i className="fa fa-globe fa-2x"></i>
-                           <span className="nav-text">Appointments</span>
-                    </Link>
-                    </li>
-                   
-                    <li className="has-subnav">
-                    <Link to="/Map"> {/* Use Link instead of <a> */}
-                            <i className="fa fa-globe fa-2x"></i>
-                           <span className="nav-text">Map</span>
-                    </Link>
-                    </li>
-                    <li>
-                    <Link to="/FcComponent"> {/* Use Link instead of <a> */}
-                            <i className="fa fa-globe fa-2x"></i>
-                           <span className="nav-text">fc</span>
-                    </Link>
-                    </li>
-                </ul>
-                <ul className="logout">
-                    <li>
-                        <a href="#">
-                            <i className="fa fa-power-off fa-2x"></i>
-                            <span className="nav-text">Logout</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-        </div>
-    );
+  const itemClass = ({ isActive }) =>
+    isActive ? 'nav-row nav-row--active' : 'nav-row';
+
+  return (
+    <aside className={`app-sidebar ${isOpen ? 'app-sidebar--open' : ''}`} aria-label="Main navigation">
+      <button
+        type="button"
+        className="app-sidebar__toggle"
+        onClick={toggle}
+        aria-expanded={isOpen}
+        aria-label={isOpen ? 'Close menu' : 'Open menu'}
+      >
+        <i className={`bx ${isOpen ? 'bx-x' : 'bx-menu'} bx-sm`} aria-hidden />
+      </button>
+      <div className="app-sidebar__brand">
+        <span className="app-sidebar__mark">T</span>
+        {isOpen && <span className="app-sidebar__title">TransAct</span>}
+      </div>
+      <nav className="app-sidebar__nav">
+        <NavLink to="/" end className={itemClass} onClick={close}>
+          <i className="bx bx-home-alt-2" aria-hidden />
+          <span>Home</span>
+        </NavLink>
+        <NavLink to="/RtoAboutUS" className={itemClass} onClick={close}>
+          <i className="bx bx-info-circle" aria-hidden />
+          <span>About</span>
+        </NavLink>
+        <NavLink to="/VehicleServices" className={itemClass} onClick={close}>
+          <i className="bx bx-grid-alt" aria-hidden />
+          <span>Services</span>
+        </NavLink>
+        <Link to={{ pathname: '/', hash: 'contact' }} className="nav-row" onClick={close}>
+          <i className="bx bx-phone" aria-hidden />
+          <span>Contact</span>
+        </Link>
+        <NavLink to="/appointments" className={itemClass} onClick={close}>
+          <i className="bx bx-calendar-check" aria-hidden />
+          <span>Appointments</span>
+        </NavLink>
+        <NavLink to="/map" className={itemClass} onClick={close}>
+          <i className="bx bx-map" aria-hidden />
+          <span>Map</span>
+        </NavLink>
+        <NavLink to="/FcComponent" className={itemClass} onClick={close}>
+          <i className="bx bx-file-blank" aria-hidden />
+          <span>Fitness cert.</span>
+        </NavLink>
+        <NavLink to="/UserLogin" className={itemClass} onClick={close}>
+          <i className="bx bx-user" aria-hidden />
+          <span>Sign in</span>
+        </NavLink>
+        <NavLink to="/signup" className={itemClass} onClick={close}>
+          <i className="bx bx-user-plus" aria-hidden />
+          <span>Register</span>
+        </NavLink>
+        <NavLink to="/admin-login" className={(p) => `${itemClass(p)} nav-row--admin`} onClick={close}>
+          <i className="bx bx-shield-quarter" aria-hidden />
+          <span>Admin</span>
+        </NavLink>
+      </nav>
+      <div className="app-sidebar__footer">
+        <Link to="/ViewFines" className="nav-row nav-row--compact" onClick={close}>
+          <i className="bx bx-receipt" aria-hidden />
+          <span>Pay fines</span>
+        </Link>
+      </div>
+    </aside>
+  );
 }
 
-export default Sidebar;
+export default AppSidebar;

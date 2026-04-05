@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import { API_BASE } from '../api/client';
 
 const VehicleForm = () => {
   const [vehicleNumber, setVehicleNumber] = useState('');
@@ -13,8 +13,9 @@ const VehicleForm = () => {
   useEffect(() => {
     const fetchFCDetails = async () => {
       try {
-        const response = await axios.get('http://localhost:3001/RTO/FCDetails');
-        setFcDetails(response.data);
+        const res = await fetch(`${API_BASE}/RTO/FCDetails`);
+        const data = await res.json();
+        setFcDetails(Array.isArray(data) ? data : data?.data ?? []);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -105,9 +106,9 @@ const VehicleForm = () => {
 
       {result && (
         <div>
-          <h3>Details Found:</h3>
-          <p>Issued Date: {result.issuedDate}</p>
-          <p>Expiry Date: {result.expiryDate}</p>
+          <h3>Details found</h3>
+          <p>Issued: {result.fcIssuedDate}</p>
+          <p>Expires: {result.fcExpiryDate}</p>
         </div>
       )}
     </div>
