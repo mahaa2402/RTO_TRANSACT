@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import "./AdminHomePage.css";
-import DrivingLicenseApplicants from "./DriverLicenseApplicants"; // Import detailed component
 import IssueFine from "./IssueFine";
 import FetchViolations from "./FetchViolations";
 import VehicleFines from "./VehicleFines";

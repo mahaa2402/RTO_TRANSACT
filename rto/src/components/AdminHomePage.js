@@ -4,8 +4,6 @@ import DrivingLicenseApplicants from "./DriverLicenseApplicants"; // Import deta
 import VehicleOwners from "./VehicleRegistrationAppliacnts";
 import AdminFeeChecking from "./AdminFeeChecking";
 import FetchAppointments from "./FetchAppointments";
-import FcComponent from "./FcComponent";
-
 
 const AdminDashboard = () => {
   const [drivingLicenseApplicants, setDrivingLicenseApplicants] = useState(0);

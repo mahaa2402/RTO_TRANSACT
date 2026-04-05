@@ -73,7 +73,7 @@ const ViewFines = () => {
               <th>Reason</th>
               <th>Status</th>
               <th>Date Issued</th>
-             
+              <th>Action</th>
             </tr>
           </thead>
           <tbody>
@@ -85,7 +85,12 @@ const ViewFines = () => {
                 <td>{fine.status}</td>
                 <td>{new Date(fine.dateIssued).toLocaleDateString()}</td>
                 <td>
-                  
+                  <button
+                    type="button"
+                    onClick={() => handleToggleStatus(fine.vehicleNumber, fine.status)}
+                  >
+                    Mark paid
+                  </button>
                 </td>
               </tr>
             ))}
@@ -105,6 +110,7 @@ const ViewFines = () => {
               <th>Reason</th>
               <th>Status</th>
               <th>Date Issued</th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody>
@@ -115,6 +121,14 @@ const ViewFines = () => {
                 <td>{fine.reason}</td>
                 <td>{fine.status}</td>
                 <td>{new Date(fine.dateIssued).toLocaleDateString()}</td>
+                <td>
+                  <button
+                    type="button"
+                    onClick={() => handleToggleStatus(fine.vehicleNumber, fine.status)}
+                  >
+                    Mark unpaid
+                  </button>
+                </td>
               </tr>
             ))}
           </tbody>
